@@ -1,0 +1,1791 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+	<link rel="preload" href="https://developer.ibm.com/site-content/themes/ibmdeveloper-carbon/style.css?cb=202" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="https://developer.ibm.com/site-content/themes/ibmdeveloper-carbon/style.css?cb=202"></noscript>
+	<script>
+		/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			// unbind listeners
+			if( link.addEventListener ){
+				link.removeEventListener( "load", enableStylesheet );
+			} else if( link.attachEvent ){
+				link.detachEvent( "onload", enableStylesheet );
+			}
+			link.setAttribute( "onload", null );
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+	</script>
+	<title>Search Results for &#8220;&#8221; &#8211; IBM Developer</title>
+<link rel='dns-prefetch' href='//1.www.s81c.com' />
+<link rel='dns-prefetch' href='//resources.digital-cloud-ibm.medallia.eu' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="IBM Developer &raquo; Feed" href="https://developer.ibm.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="IBM Developer &raquo; Comments Feed" href="https://developer.ibm.com/comments/feed/" />
+    <link rel="canonical" href="" />
+    <meta name="madeupmeta" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:site_name" content="IBM Developer" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="https://s3.us.cloud-object-storage.appdomain.cloud/ibmdevwp/icons/social/social.jpg"/>
+    <meta property="twitter:account_id" content="16362921" />
+    <meta name="twitter:card" content="summary">    <meta name="twitter:url" content="">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="https://s3.us.cloud-object-storage.appdomain.cloud/ibmdevwp/icons/social/social.jpg">
+    <meta property="twitter:image:src" content="https://s3.us.cloud-object-storage.appdomain.cloud/ibmdevwp/icons/social/social.jpg" />
+    <meta name="twitter:site" content="https://developer.ibm.com">
+    <meta name="twitter:creator" content="@ibmdeveloper">
+    <meta name="ahrefs-site-verification" content="94fa8aa62b043c70442b349844ee10902416702fc2728b6a378a00d49ecc61d7">
+    
+    <!-- BEGIN: Use this section to set page specific variables for the Page Tag -->
+  	<script language="JavaScript">var NTPT_PGEXTRA="ibmCmaId=&ibmContentAreas=";</script>
+  	<!--END -->
+    <script>
+  		digitalData = {
+  				"page": {
+  					"category": {
+  						"primaryCategory": "SOFDCACLZZ"
+  					},
+  					"pageInfo": {
+  						"effectiveDate": "",
+  						"language": "en",
+  						"publishDate": "",
+  						"expiryDate": "",
+  						"publisher": "IBM Corporation",
+  						"version": "v18",
+  						"ibm": {
+  							"contentDelivery": "IBM Developer template",
+  							"contentProducer": "IBM Developer",
+  							"country": "ZZ",
+                "contentArea": "",
+  							"owner": "developerWorks Content/Raleigh/IBM",
+  							"siteID": "DWNEXT",
+  							"subject": "ZZ000",
+  							"type": "",
+  							"contentId": "",
+  						},
+  						"keywords": "",
+  						"description": ""
+  					}
+  				}
+  			};
+
+        window._analytics = {
+          "coremetrics": false,
+          "optimizely": false,
+          "googleAddServices": false,
+          "addRoll": false,
+          "intercom": false,
+          "fullStory": false,
+          "hotjar": false,
+          "tealeaf": false,
+          "nps": true,
+          "segment_key": 'HU3dbkAG5wE0F1IkRf9S1RexlAqo3jby'
+        };
+  	</script>
+  	<!-- Segment meta tag -->
+  	<meta name="segment" property="developerWorks (developerWorks)" productTitle="developerWorks" value="Home English (developerWorks)"/>
+
+
+    <link rel="alternate" type="application/rss+xml" title="IBM Developer &raquo; Artificial intelligence Category Feed" href="https://developer.ibm.com/technologies/artificial-intelligence/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.ibm.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.4.2"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<script type='text/javascript' src='https://developer.ibm.com/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='https://developer.ibm.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var authLinkAction = {"ajax_url":"https:\/\/developer.ibm.com\/wp-admin\/admin-ajax.php","nonce":"49fd87e306"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://developer.ibm.com/site-content/plugins/w3-ibm-id-auth/includes/../js/authPageAccess.js?ver=5.4.2'></script>
+<script defer type='text/javascript' src='https://developer.ibm.com/site-content/themes/ibmdeveloper-carbon/js/ibmcode.js?ver=20151217'></script>
+<script async type='text/javascript' src='https://developer.ibm.com/site-content/themes/ibmdeveloper-carbon/js/carbon-components.min.js?ver=5.4.2'></script>
+<script async type='text/javascript' src='//1.www.s81c.com/common/stats/ida_stats.js'></script>
+<script async type='text/javascript' src='//resources.digital-cloud-ibm.medallia.eu/wdceuibm/2398/onsite/embed.js'></script>
+<link rel='https://api.w.org/' href='https://developer.ibm.com/developerapi/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://developer.ibm.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://developer.ibm.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.4.2" />
+<link rel="icon" href="https://developer.ibm.com/site-content/uploads/2018/12/bee_128.png" sizes="32x32" />
+<link rel="icon" href="https://developer.ibm.com/site-content/uploads/2018/12/bee_128.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://developer.ibm.com/site-content/uploads/2018/12/bee_128.png" />
+<meta name="msapplication-TileImage" content="https://developer.ibm.com/site-content/uploads/2018/12/bee_128.png" />
+</head>
+<body id="ibm-com" data-loggedin="" data-nls="" data-envt="production" class="archive search search-results category category-artificial-intelligence category-687 no-fixed-menu no-sidebar nosb">
+	<div class="code_p_announcement light" id="code_announcement">
+              <div class="code_content__wrap"><a class="announce_link" href="https://developer.ibm.com/conferences/digital-developer-conference-hybrid-cloud/?Developer-_-ddc2020hc-_-leadbanner-ov79061">
+                            <p>Digital Developer Conference: Hybrid Cloud. On Sep 22 & 24, start your journey to OpenShift certification. <span class="bx--btn bx--btn--primary">Free registration<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="will-change: transform;"><path d="M14 4l-1.1 1.1 6 6.1H2v1.6h16.9l-6 6.1L14 20l8-8z"></path></svg></span></p>
+                          </a><a href="#" class="announcement_close" id="announcement_close"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14 14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12-5.4 12-12 12z"></path><path d="M21.4 23L16 17.6 10.6 23 9 21.4l5.4-5.4L9 10.6 10.6 9l5.4 5.4L21.4 9l1.6 1.6-5.4 5.4 5.4 5.4z"></path><title>Close outline</title></svg></a>
+              </div>
+            </div>	<div class="bx--header--website-wrap">
+  <div class="code_content__wrap">
+
+    <header aria-label="IBM Platform Name" class="bx--header" role="banner">
+      <a class="bx--skip-to-content" href="#main-content" tabindex="0">Skip to main content</a>
+      <button aria-label="Open menu" id="developer-burger" class="bx--header__action--menu bx--header__action bx--header__menu-trigger bx--header__menu-toggle" title="Open menu" type="button">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" style="will-change: transform;">
+          <path d="M2 14.8h16V16H2zm0-3.6h16v1.2H2zm0-3.6h16v1.2H2zM2 4h16v1.2H2z"></path>
+        </svg>
+      </button>
+      <a class="bx--header__name-old" href="https://developer.ibm.com"><span class="bx--header__name--prefix">IBM</span>&nbsp;Developer</a>
+      <div class="bx--header__name">
+        <a class="bx--header__ibm" href="//www.ibm.com">
+          <svg class="Footer-module--logo--3otJM" width="47" height="30" viewBox="0 -10 85 35" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><path d="M0 32h15.689v-2.038H0zM0 27.721h15.689v-2.038H0zM4.483 23.442h6.724v-2.037H4.483zM4.483 19.164h6.724v-2.038H4.483zM4.483 14.885h6.724v-2.037H4.483zM4.482 10.606h6.724V8.568H4.482zM0 6.327h15.689V4.29H0zM0 2.049h15.689V.011H0zM17.93 29.963V32h16.504a8.521 8.521 0 0 0 5.54-2.037H17.93zM17.93 25.683v2.038h23.914a8.535 8.535 0 0 0 .85-2.038H17.93zM22.412 23.442h6.724v-2.037h-6.724zM40.124 17.126H22.412v2.038H41.77a8.62 8.62 0 0 0-1.645-2.038M22.413 12.848v2.036h17.786a8.612 8.612 0 0 0 1.644-2.037h-19.43zM42.693 6.327a8.447 8.447 0 0 0-.85-2.037H17.93v2.037h24.763zM39.974 2.049a8.521 8.521 0 0 0-5.54-2.037H17.93v2.037h22.044zM22.412 10.606h6.724V8.568h-6.724zM35.453 10.606h7.29a8.603 8.603 0 0 0 .248-2.038h-7.538v2.038zM35.453 21.405v2.037h7.538c0-.703-.09-1.384-.248-2.037h-7.29zM57.457 0H44.825v2.038h13.34zM44.826 32h11.21v-2.038h-11.21zM44.826 27.72h11.21v-2.038h-11.21zM49.309 23.439h6.727v-2.038h-6.727zM49.309 19.159h6.727v-2.038h-6.727zM69.488 32h11.21v-2.038h-11.21zM69.488 27.72h11.21v-2.038h-11.21zM69.488 23.439h6.726v-2.038h-6.726zM69.487 19.159h6.726v-2.038h-6.726zM69.488 14.879h6.726V12.84H63.606l-.707 2.038h5.903l.686-1.94zM61.916 12.84H49.31v2.039h6.726v-1.94l.686 1.94h5.903zM76.213 8.56H65.091l-.707 2.038h11.83zM68.06 0l-.706 2.038h13.344V0zM62.757 32l.72-2.038h-1.432zM61.254 27.72h3.015l.72-2.038h-4.455zM59.743 23.44h6.037l.72-2.039h-7.476zM58.232 19.159h9.06l.719-2.038h-10.5zM49.309 10.598h11.83l-.707-2.038H49.309zM65.868 6.318h14.83V4.28H66.576zM58.947 4.28H44.826v2.038h14.828z"></path></g></svg>
+        </a>
+        <a href="https://developer.ibm.com" class="bx--header__ibmdeveloper">
+          IBM <b>Developer</b>        </a>
+      </div>
+
+      <nav aria-label="IBM [Platform]" class="bx--header__nav">
+        <ul class="bx--header__menu-bar" role="menubar"><li id='topics' class=' menu-item menu-item-type-custom menu-item-object-custom menu-item menu-item-type-custom menu-item-object-custom menu-item-has-mega'><a  aria-haspopup="menu" aria-expanded="false" role="menuitem" class="bx--header__menu-item bx--header__menu-title" href="#">Topics<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" class="bx--header__menu-arrow"><path d="M5 6L0 1 .7.3 5 4.6 9.3.3l.7.7z"></path></svg></a><div class="mega-menu bx--header__menu sub-menu" role="menu"><div class="mega-menu-inner"><div class="code_content__wrap"><ul>
+ 	<li>
+<h4>Technologies</h4>
+</li>
+ 	<li><a href="/technologies/analytics/">Analytics</a></li>
+ 	<li><a href="/technologies/artificial-intelligence/">Artificial Intelligence</a></li>
+ 	<li><a href="/technologies/blockchain/">Blockchain</a></li>
+ 	<li><a href="/technologies/containers/">Containers</a></li>
+ 	<li><a href="/technologies/java/">Java</a></li>
+ 	<li><a href="/technologies/cobol/">COBOL</a></li>
+ 	<li><a href="/technologies/">See all</a></li>
+</ul>
+<ul>
+ 	<li>
+<h4>Industries</h4>
+</li>
+ 	<li><a href="/industries/gaming/">Gaming</a></li>
+ 	<li><a href="/industries/finance/">Finance</a></li>
+ 	<li><a href="/industries/retail/">Retail</a></li>
+ 	<li><a href="/industries/">See all</a></li>
+</ul>
+<ul>
+ 	<li>
+<h4>Deployment Models</h4>
+</li>
+ 	<li><a href="/depmodels/cloud/">Cloud</a></li>
+ 	<!-- <li><a href="/depmodels/hybrid/">Hybrid Cloud</a></li> -->
+ 	<li><a href="/depmodels/edge-computing/">Edge Computing</a></li>
+ 	<li><a href="/depmodels/on-prem/">On Premises</a></li>
+ 	<li><a href="/depmodels/">See all</a></li>
+</ul>
+<ul>
+ 	<li>
+<h4>Solutions</h4>
+</li>
+ 	<li><a href="/solutions/ai-development/">Artificial Intelligence</a></li>
+ 	<li><a href="/solutions/blockchain-app-development/">Blockchain</a></li>
+ 	<li><a href="/solutions/container-orchestration-and-deployment/">Containers &amp; Microservices</a></li>
+ 	<li><a href="/solutions/mobile-app-development/">Mobile Development</a></li>
+</ul></div></div></div></li>
+<li id='products_&_services' class=' menu-item menu-item-type-custom menu-item-object-custom menu-item menu-item-type-custom menu-item-object-custom menu-item-has-mega'><a  aria-haspopup="menu" aria-expanded="false" role="menuitem" class="bx--header__menu-item bx--header__menu-title" href="#">Products & Services<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" class="bx--header__menu-arrow"><path d="M5 6L0 1 .7.3 5 4.6 9.3.3l.7.7z"></path></svg></a><div class="mega-menu bx--header__menu sub-menu" role="menu"><div class="mega-menu-inner"><div class="code_content__wrap"><ul>
+  <li><h4>Open Source</h4></li>
+  <li><a href="/components/kubernetes/">Kubernetes</a></li>
+  <li><a href="/components/node-red/">Node-RED</a></li>
+  <li><a href="/components/istio/">Istio</a></li>
+  <li><a href="/components/tensorflow/">TensorFlow</a></li>
+  <li><a href="/components/open-liberty/">Open Liberty</a></li>
+  <li><a href="/components/">See all</a></li>
+</ul>
+<ul>
+  <li><h4>IBM Products & Services</h4></li>
+  <li><a href="/components/cloud-pak-for-applications/">IBM Cloud Pak for Applications</a></li>
+  <li><a href="/components/ibmz/">IBM Z</a></li>
+  <li><a href="/components/redhat-openshift-ibm-cloud/">Red Hat OpenShift on IBM Cloud</a></li>
+  <li><a href="/components/cloud-pak-for-data/">IBM Cloud Pak for Data</a></li>
+  <li><a href="/components/sterling/">IBM Sterling</a></li>
+  <li><a href="/components/">See all</a></li>
+</ul></div></div></div></li>
+<li id='community' class=' menu-item menu-item-type-custom menu-item-object-custom menu-item menu-item-type-custom menu-item-object-custom menu-item-has-mega'><a  aria-haspopup="menu" aria-expanded="false" role="menuitem" class="bx--header__menu-item bx--header__menu-title" href="#">Community<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" class="bx--header__menu-arrow"><path d="M5 6L0 1 .7.3 5 4.6 9.3.3l.7.7z"></path></svg></a><div class="mega-menu bx--header__menu sub-menu" role="menu"><div class="mega-menu-inner"><div class="code_content__wrap"><ul>
+  <li><a href="/community/">Home</a></li>
+  <li><a href="/blogs/">Blog posts</a></li>
+  <li><a href="/events/">Events</a></li>
+  <li><a href="/conferences/">Digital conferences</a></li>
+  <li><a href="/videos/">Videos</a></li>
+  <li><a href="/livestream/">Livestreaming</a></li>
+  <li><a href="/podcasts/">Podcasts</a></li>
+  <li><a href="/cities/">Cities</a></li>
+  <li><a href="/newsletters/">Newsletters</a></li>
+</ul>
+<div>
+<ul>
+  <li><h4>Get Involved</h4></li>
+  <li><a href="/callforcode?cm_sp=Developer-_-cfc-2020-_-nav-ov75914">Call for Code Global Challenge</a></li>
+</ul>
+<br />
+<ul>
+  <li><h4>Workshops</h4></li>
+  <li><a href="/openshift-world-tour/">Build Smart on Kubernetes World Tour</a></li>
+</ul>
+</div></div></div></div></li>
+<li id='open_source_at_ibm' class=' menu-item menu-item-type-custom menu-item-object-custom menu-item menu-item-type-custom menu-item-object-custom menu-item-has-mega'><a  aria-haspopup="menu" aria-expanded="false" role="menuitem" class="bx--header__menu-item bx--header__menu-title" href="#">Open source at IBM<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" class="bx--header__menu-arrow"><path d="M5 6L0 1 .7.3 5 4.6 9.3.3l.7.7z"></path></svg></a><div class="mega-menu bx--header__menu sub-menu" role="menu"><div class="mega-menu-inner"><div class="code_content__wrap"><ul>
+  <li><a href="/open/">Home</a></li>
+  <li><a href="/open/code/">Code</a></li>
+  <li><a href="/open/community/">Communities</a></li>
+  <li><a href="/open/culture/">Culture</a></li>
+  <li><a href="https://www.ibm.com/opensource/open-projects/">Open projects</a></li>
+  <li><a href="/collections/open-stories/">Our story</a></li>
+  <li><a href="/exchanges/models/">Model Asset eXchange</a></li>
+  <li><a href="/exchanges/data/">Data Asset eXchange</a></li>
+</ul></div></div></div></li>
+</ul>      </nav>
+      <div class="bx--header__global">
+        <div id="header-search-module" class="GlobalSearch-module--container GlobalSearch-module--hidden" role="search">
+          <label for="search-input" id="search-label" class="GlobalSearch-module--label">Search</label>
+          <form action="https://developer.ibm.com" method="GET" class="GlobalSearch-module--inputWrapper" role="combobox" aria-owns="search-menu" aria-haspopup="menu" aria-expanded="false">
+            <button tabindex="0" class="GlobalSearch-module--searchButton GlobalSearch-module--search-button--search" type="button" aria-label="Open search">
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change:transform" description="Open search" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M30 28.59L22.45 21A11 11 0 1 0 21 22.45L28.59 30zM5 14a9 9 0 1 1 9 9 9 9 0 0 1-9-9z"></path>
+              </svg>
+            </button>
+            <input type="text" autocomplete="off" tabindex="-1" aria-autocomplete="list" aria-controls="search-menu" aria-activedescendant="menu-item-0" class="GlobalSearch-module--input GlobalSearch-module--hidden" id="search-input-header" placeholder="Search IBM Developer" value="" name="s">
+            <button tabindex="-1" class="GlobalSearch-module--searchButton GlobalSearch-module--search-button--close GlobalSearch-module--hidden" type="button" aria-label="Clear search">
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change:transform" description="Clear search" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"></path>
+              </svg>
+            </button>
+          </form>
+          <ul aria-labelledby="search-label" role="menu" id="search-menu" class="GlobalSearch-module--list GlobalSearch-module--hidden"></ul>
+        </div>
+        <div id="header-login-module" aria-expanded="false" class="GlobalLogin-module--container GlobalLogin-module--hidden" role="login">
+                      <button aria-label="Open menu" class="bx--header__action--login bx--header__action" title="Open menu" type="button">
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;">
+                <path d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2zm-6 24.38v-2A3.22 3.22 0 0 1 13 21h6a3.22 3.22 0 0 1 3 3.39v2a11.92 11.92 0 0 1-12 0zm14-1.46v-.61A5.21 5.21 0 0 0 19 19h-6a5.2 5.2 0 0 0-5 5.31v.59a12 12 0 1 1 16 0z"></path><path d="M16 7a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3z"></path>
+              </svg>
+            </button>
+            <ul id="ibm-signin-minimenu-container" role="menu" aria-label="Profile" class="bx--header__submenu">
+              <li class="menu-item"><a class="bx--header__menu-item" role="menuitem" href="/profile">My Dashboard</a></li>
+							<li class="menu-item"><a class="bx--header__menu-item" role="menuitem" href="https://myibm.ibm.com/?lnk=mmi" tabindex="0">My IBM</a></li>
+							<li class="menu-item"><a class="bx--header__menu-item" role="menuitem" href="https://developer.ibm.com/sso/login?d=https%3A%2F%2Fdeveloper.ibm.com%2F%3Fs%3D%26category_name%3Dartificial-intelligence%26type%3Dmodels&lang=us_EN" tabindex="-1">Sign In</a></li>
+						</ul>
+                  </div>
+      </div>
+    </header>
+  </div>
+</div>
+<div class="side-nav-click-to-close side-nav-click-to-close__closed" id="code--side-nav-cover"></div>
+<!-- Navigation wrapper for accessibility -->
+<nav class="bx--side-nav__navigation bx--side-nav bx--side-nav--expanded bx--side-nav--website bx--side-nav--website--dark bx--side-nav--ux" aria-label="Side navigation" id="code--side-nav-old">
+<!--nav class="bx--side-nav__navigation bx--side-nav bx--side-nav--ux bx--side-nav--website--dark" role="navigation" aria-label="Navigation" id="code--side-nav"-->
+  <!-- <header class="bx--side-nav__header"></header> -->
+  <!-- Renders all of our navigation items -->
+  <ul class="bx--side-nav__items" id="developerNavTriggersMobile"><li data-level="0" class='bx--side-nav__item '><a href="/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Home</span></a></li>
+<hr class="bx--side-nav__divider">
+<li data-level="0" class='megasection bx--side-nav__item'><button aria-haspopup="true" aria-expanded="true" class="noclick bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Topics</span>
+            </button>
+<ul class="bx--side-nav__menu" role="menu">
+<li data-level="1" class='bx--side-nav__menu-item'><button aria-haspopup="true" aria-expanded="false" class="bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Technologies</span>
+              <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg>
+              </div>
+            </button>
+	<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/technologies/analytics" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Analytics</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/technologies/artificial-intelligence" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Artificial Intelligence</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/technologies/blockchain" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Blockchain</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/technologies/containers" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Containers</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/technologies/java" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Java</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/technologies/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">See all</span></a></li>
+	</ul>
+</li>
+<li data-level="1" class='bx--side-nav__menu-item'><button aria-haspopup="true" aria-expanded="false" class="bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Industries</span>
+              <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg>
+              </div>
+            </button>
+	<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/industries/gaming/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Gaming</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/industries/finance/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Finance</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/industries/retail/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Retail</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/industries/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">See all</span></a></li>
+	</ul>
+</li>
+<li data-level="1" class='bx--side-nav__menu-item'><button aria-haspopup="true" aria-expanded="false" class="bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Deployment models</span>
+              <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg>
+              </div>
+            </button>
+	<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/depmodels/cloud/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Cloud</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/depmodels/edge-computing/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Edge computing</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/depmodels/on-prem/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">On Premises</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/depmodels/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">See all</span></a></li>
+	</ul>
+</li>
+<li data-level="1" class='bx--side-nav__menu-item'><button aria-haspopup="true" aria-expanded="false" class="bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Solutions</span>
+              <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg>
+              </div>
+            </button>
+	<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/solutions/ai-development/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Artificial Intelligence</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/solutions/blockchain-app-development/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Blockchain</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/solutions/container-orchestration-and-deployment/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Containers & Microservices</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/solutions/mobile-app-development/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Mobile Development</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<hr class="bx--side-nav__divider">
+<li data-level="0" class='megasection bx--side-nav__item'><button aria-haspopup="true" aria-expanded="true" class="noclick bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Products & Services</span>
+            </button>
+<ul class="bx--side-nav__menu" role="menu">
+<li data-level="1" class='bx--side-nav__menu-item'><button aria-haspopup="true" aria-expanded="false" class="bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Open Source</span>
+              <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg>
+              </div>
+            </button>
+	<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/kubernetes/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Kubernetes</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/node-red/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Node-RED</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/istio/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Istio</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/tensorflow/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">TensorFlow</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/open-liberty/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Open Liberty</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">See all</span></a></li>
+	</ul>
+</li>
+<li data-level="1" class='bx--side-nav__menu-item'><button aria-haspopup="true" aria-expanded="false" class="bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">IBM Product & Services</span>
+              <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg>
+              </div>
+            </button>
+	<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/cloud-pak-for-applications/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">IBM Cloud Pak for Applications</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/cloud-pak-for-data/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">IBM Cloud Pak for Data</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/redhat-openshift-ibm-cloud/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Red Hat OpenShift on IBM Cloud</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/cloud-pak-for-data/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">IBM Cloud Pak for Data</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/sterling/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">IBM Sterling</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/components/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">See all</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<hr class="bx--side-nav__divider">
+<li data-level="0" class='megasection bx--side-nav__item'><button aria-haspopup="true" aria-expanded="true" class="noclick bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Community</span>
+            </button>
+<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/community/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Home</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/blogs/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Blog posts</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/events/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Events</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/conferences/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Digital conferences</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/videos/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Videos</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="https://developer.ibm.com/livestream/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Livestreaming</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/podcasts/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Podcasts</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/cities/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Cities</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/newsletters/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Newsletters</span></a></li>
+<li data-level="1" class='bx--side-nav__menu-item'><button aria-haspopup="true" aria-expanded="false" class="bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Get Involved</span>
+              <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg>
+              </div>
+            </button>
+	<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/callforcode?cm_sp=Developer-_-cfc-2020-_-nav-ov75914" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Call for Code Global Challenge</span></a></li>
+	</ul>
+</li>
+<li data-level="1" class='bx--side-nav__menu-item'><button aria-haspopup="true" aria-expanded="false" class="bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Workshops</span>
+              <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg>
+              </div>
+            </button>
+	<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/openshift-world-tour" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Build Smart on Kubernetes World Tour</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<hr class="bx--side-nav__divider">
+<li data-level="0" class='megasection bx--side-nav__item'><button aria-haspopup="true" aria-expanded="true" class="noclick bx--side-nav__submenu" type="button">
+              <span class="bx--side-nav__submenu-title">Opensource at IBM</span>
+            </button>
+<ul class="bx--side-nav__menu" role="menu">
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/open/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Home</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/open/code/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Code</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/open/community" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Community</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/open/culture/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Culture</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="https://www.ibm.com/opensource/open-projects/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Open projects</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/collections/open-stories" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Our story</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/exchanges/models/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Model asset exchange</span></a></li>
+<li data-level="2" class='bx--side-nav__menu-item'><a href="/exchanges/data/" class="bx--side-nav__link" role="menuitem"><span class="bx--side-nav__link-text">Data asset exchange</span></a></li>
+</ul>
+</li>
+<hr class="bx--side-nav__divider">
+</ul>  <!-- Renders the button to collapse or expand the side nav -->
+  <!-- <footer class="bx--side-nav__footer"></footer> -->
+</nav>
+
+	<!-- totally new layout -->
+<div class="ibm-developer" style="display:none;">
+  <div class="bx--grid">
+    <div class="bx--row">
+      <div class="bx--col-lg-12 ibmd-leftnav">max-content width</div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- begin new layout -->
+<div id="content" class="container nosb">
+    <div class="page_content">
+    <div class="page_content_wrap">
+
+
+<div class="search-hero">
+	<div class="search-hero__wrap">
+		<div class="bx--grid bx--no-gutter">
+			<div class="bx--row">
+				<div class="bx--col-sm-12 bx--col-md-10 bx--col-lg-10">
+					<form id="code_search__form_body" method="get" action="https://developer.ibm.com/">
+						<div class="code_search__inputs">
+							<button class="bx--cloud-header-list__btn" type="submit">
+								<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M30 28.59L22.45 21A11 11 0 1 0 21 22.45L28.59 30zM5 14a9 9 0 1 1 9 9 9 9 0 0 1-9-9z"></path></svg>
+							</button>
+							<button class="bx--search-reset" type="button"><svg focusable="false" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"></path></svg></button>
+        			<input autocomplete="off" placeholder="Search IBM Developer" type="text" name="s" value="">
+      			</div>
+						<input type="hidden" id="frm_orderby" name="orderby" value="date" />
+						<input type="hidden" id="frm_order" name="order" value="desc" />
+						<input type="hidden" id="frm_category_name" name="category_name" value="artificial-intelligence" />
+						<input type="hidden" id="frm_ptypes" name="type" value="models" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="search-content">
+	<div class="search-filters"><div id="search_leftnav" class="search_leftnav">
+              <div class="mobile_wrap">
+                <div class="inner">
+                  <nav class="content-group"><h4>Content Types</h4><div class="cbs"><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-post" class="bx--checkbox" type="checkbox"  value="blogs" />
+                    <label for="cb-post" class="bx--checkbox-label">Blog Posts</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_announce" class="bx--checkbox" type="checkbox"  value="announcements" />
+                    <label for="cb-ibmcode_announce" class="bx--checkbox-label">Announcements</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_articles" class="bx--checkbox" type="checkbox"  value="articles" />
+                    <label for="cb-ibmcode_articles" class="bx--checkbox-label">Articles</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_conferences" class="bx--checkbox" type="checkbox"  value="conferences" />
+                    <label for="cb-ibmcode_conferences" class="bx--checkbox-label">Digital Developer Conferences</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_courses" class="bx--checkbox" type="checkbox"  value="courses" />
+                    <label for="cb-ibmcode_courses" class="bx--checkbox-label">Courses</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_datasets" class="bx--checkbox" type="checkbox"  value="datasets" />
+                    <label for="cb-ibmcode_datasets" class="bx--checkbox-label">Datasets</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_model_assets" class="bx--checkbox" type="checkbox"  checked value="models" />
+                    <label for="cb-ibmcode_model_assets" class="bx--checkbox-label">Models</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_patterns" class="bx--checkbox" type="checkbox"  value="patterns" />
+                    <label for="cb-ibmcode_patterns" class="bx--checkbox-label">Code Patterns</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_podcasts" class="bx--checkbox" type="checkbox"  value="podcasts" />
+                    <label for="cb-ibmcode_podcasts" class="bx--checkbox-label">Podcasts</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_projects" class="bx--checkbox" type="checkbox"  value="projects" />
+                    <label for="cb-ibmcode_projects" class="bx--checkbox-label">Open Project</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_series" class="bx--checkbox" type="checkbox"  value="series" />
+                    <label for="cb-ibmcode_series" class="bx--checkbox-label">Series</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_tutorials" class="bx--checkbox" type="checkbox"  value="tutorials" />
+                    <label for="cb-ibmcode_tutorials" class="bx--checkbox-label">Tutorials</label>
+                 </div><div class="bx--form-item bx--checkbox-wrapper">
+                    <input id="cb-ibmcode_videos" class="bx--checkbox" type="checkbox"  value="videos" />
+                    <label for="cb-ibmcode_videos" class="bx--checkbox-label">Videos</label>
+                 </div></div></nav><nav class="filter-group"><h4>Technologies</h4><div class="selected_filters"><ul><div class="bx--form-item bx--checkbox-wrapper">
+                                  <input id="cb-Artificial intelligence" class="bx--checkbox" type="checkbox"  checked value="artificial-intelligence" />
+                                  <label for="cb-Artificial intelligence" class="bx--checkbox-label">Artificial intelligence</label>
+                                </div></ul><hr /></div><div class="cbs"><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Analytics" class="bx--checkbox" type="checkbox" value="analytics" />
+                            <label for="cb-Analytics" class="bx--checkbox-label">Analytics</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-API Management" class="bx--checkbox" type="checkbox" value="api" />
+                            <label for="cb-API Management" class="bx--checkbox-label">API Management</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Blockchain" class="bx--checkbox" type="checkbox" value="blockchain" />
+                            <label for="cb-Blockchain" class="bx--checkbox-label">Blockchain</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-COBOL" class="bx--checkbox" type="checkbox" value="cobol" />
+                            <label for="cb-COBOL" class="bx--checkbox-label">COBOL</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Containers" class="bx--checkbox" type="checkbox" value="containers" />
+                            <label for="cb-Containers" class="bx--checkbox-label">Containers</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Continuous delivery" class="bx--checkbox" type="checkbox" value="continuous-delivery" />
+                            <label for="cb-Continuous delivery" class="bx--checkbox-label">Continuous delivery</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Continuous integration" class="bx--checkbox" type="checkbox" value="continuous-integration" />
+                            <label for="cb-Continuous integration" class="bx--checkbox-label">Continuous integration</label>
+                          </div></div><div class="more_filters"><ul style="display:none;"><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Conversation" class="bx--checkbox" type="checkbox" value="conversation" />
+                            <label for="cb-Conversation" class="bx--checkbox-label">Conversation</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Data management" class="bx--checkbox" type="checkbox" value="data-management" />
+                            <label for="cb-Data management" class="bx--checkbox-label">Data management</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Data science" class="bx--checkbox" type="checkbox" value="data-science" />
+                            <label for="cb-Data science" class="bx--checkbox-label">Data science</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Data stores" class="bx--checkbox" type="checkbox" value="data-stores" />
+                            <label for="cb-Data stores" class="bx--checkbox-label">Data stores</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Databases" class="bx--checkbox" type="checkbox" value="databases" />
+                            <label for="cb-Databases" class="bx--checkbox-label">Databases</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Deep learning" class="bx--checkbox" type="checkbox" value="deep-learning" />
+                            <label for="cb-Deep learning" class="bx--checkbox-label">Deep learning</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-DevOps" class="bx--checkbox" type="checkbox" value="devops" />
+                            <label for="cb-DevOps" class="bx--checkbox-label">DevOps</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Front-end development" class="bx--checkbox" type="checkbox" value="front-end-development" />
+                            <label for="cb-Front-end development" class="bx--checkbox-label">Front-end development</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Governance" class="bx--checkbox" type="checkbox" value="governance" />
+                            <label for="cb-Governance" class="bx--checkbox-label">Governance</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Infrastructure" class="bx--checkbox" type="checkbox" value="infrastructure" />
+                            <label for="cb-Infrastructure" class="bx--checkbox-label">Infrastructure</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IoT" class="bx--checkbox" type="checkbox" value="iot" />
+                            <label for="cb-IoT" class="bx--checkbox-label">IoT</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Java" class="bx--checkbox" type="checkbox" value="java" />
+                            <label for="cb-Java" class="bx--checkbox-label">Java</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-JavaScript" class="bx--checkbox" type="checkbox" value="javascript" />
+                            <label for="cb-JavaScript" class="bx--checkbox-label">JavaScript</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Knowledge discovery" class="bx--checkbox" type="checkbox" value="knowledge-discovery" />
+                            <label for="cb-Knowledge discovery" class="bx--checkbox-label">Knowledge discovery</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Linux" class="bx--checkbox" type="checkbox" value="linux" />
+                            <label for="cb-Linux" class="bx--checkbox-label">Linux</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Machine learning" class="bx--checkbox" type="checkbox" value="machine-learning" />
+                            <label for="cb-Machine learning" class="bx--checkbox-label">Machine learning</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Messaging" class="bx--checkbox" type="checkbox" value="messaging" />
+                            <label for="cb-Messaging" class="bx--checkbox-label">Messaging</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Microservices" class="bx--checkbox" type="checkbox" value="microservices" />
+                            <label for="cb-Microservices" class="bx--checkbox-label">Microservices</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Mobile development" class="bx--checkbox" type="checkbox" value="mobile" />
+                            <label for="cb-Mobile development" class="bx--checkbox-label">Mobile development</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Natural language processing" class="bx--checkbox" type="checkbox" value="natural-language-processing" />
+                            <label for="cb-Natural language processing" class="bx--checkbox-label">Natural language processing</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Node.js" class="bx--checkbox" type="checkbox" value="node-js" />
+                            <label for="cb-Node.js" class="bx--checkbox-label">Node.js</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Object Storage" class="bx--checkbox" type="checkbox" value="object-storage" />
+                            <label for="cb-Object Storage" class="bx--checkbox-label">Object Storage</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-PHP" class="bx--checkbox" type="checkbox" value="php" />
+                            <label for="cb-PHP" class="bx--checkbox-label">PHP</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Platform as a Service" class="bx--checkbox" type="checkbox" value="paas" />
+                            <label for="cb-Platform as a Service" class="bx--checkbox-label">Platform as a Service</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Predictive analytics" class="bx--checkbox" type="checkbox" value="predictive-analytics" />
+                            <label for="cb-Predictive analytics" class="bx--checkbox-label">Predictive analytics</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Privacy" class="bx--checkbox" type="checkbox" value="privacy-and-security" />
+                            <label for="cb-Privacy" class="bx--checkbox-label">Privacy</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Python" class="bx--checkbox" type="checkbox" value="python" />
+                            <label for="cb-Python" class="bx--checkbox-label">Python</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Quantum computing" class="bx--checkbox" type="checkbox" value="quantum-computing" />
+                            <label for="cb-Quantum computing" class="bx--checkbox-label">Quantum computing</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-R language and environment" class="bx--checkbox" type="checkbox" value="r-lang" />
+                            <label for="cb-R language and environment" class="bx--checkbox-label">R language and environment</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Reactive Systems" class="bx--checkbox" type="checkbox" value="reactive-systems" />
+                            <label for="cb-Reactive Systems" class="bx--checkbox-label">Reactive Systems</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Security" class="bx--checkbox" type="checkbox" value="security" />
+                            <label for="cb-Security" class="bx--checkbox-label">Security</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Serverless" class="bx--checkbox" type="checkbox" value="serverless" />
+                            <label for="cb-Serverless" class="bx--checkbox-label">Serverless</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Software development" class="bx--checkbox" type="checkbox" value="software-development" />
+                            <label for="cb-Software development" class="bx--checkbox-label">Software development</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Speech and empathy" class="bx--checkbox" type="checkbox" value="speech-and-empathy" />
+                            <label for="cb-Speech and empathy" class="bx--checkbox-label">Speech and empathy</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Spring" class="bx--checkbox" type="checkbox" value="spring" />
+                            <label for="cb-Spring" class="bx--checkbox-label">Spring</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Swift" class="bx--checkbox" type="checkbox" value="swift" />
+                            <label for="cb-Swift" class="bx--checkbox-label">Swift</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Systems" class="bx--checkbox" type="checkbox" value="systems" />
+                            <label for="cb-Systems" class="bx--checkbox-label">Systems</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Visual recognition" class="bx--checkbox" type="checkbox" value="vision" />
+                            <label for="cb-Visual recognition" class="bx--checkbox-label">Visual recognition</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Web development" class="bx--checkbox" type="checkbox" value="web-development" />
+                            <label for="cb-Web development" class="bx--checkbox-label">Web development</label>
+                          </div></ul><a class="see_more" href="#">Show more</a></div></nav><nav class="filter-group"><h4>Industries</h4><div class="cbs"><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Finance" class="bx--checkbox" type="checkbox" value="finance" />
+                            <label for="cb-Finance" class="bx--checkbox-label">Finance</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Gaming" class="bx--checkbox" type="checkbox" value="gaming" />
+                            <label for="cb-Gaming" class="bx--checkbox-label">Gaming</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Retail" class="bx--checkbox" type="checkbox" value="retail" />
+                            <label for="cb-Retail" class="bx--checkbox-label">Retail</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Telecommunications, Media &amp; Entertainment" class="bx--checkbox" type="checkbox" value="tme" />
+                            <label for="cb-Telecommunications, Media &amp; Entertainment" class="bx--checkbox-label">Telecommunications, Media &amp; Entertainment</label>
+                          </div></div></nav><nav class="filter-group"><h4>Products &amp; Services</h4><div class="cbs"><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Akka" class="bx--checkbox" type="checkbox" value="akka" />
+                            <label for="cb-Akka" class="bx--checkbox-label">Akka</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Android" class="bx--checkbox" type="checkbox" value="android" />
+                            <label for="cb-Android" class="bx--checkbox-label">Android</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Apache Cordova" class="bx--checkbox" type="checkbox" value="apache-cordova" />
+                            <label for="cb-Apache Cordova" class="bx--checkbox-label">Apache Cordova</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Apache Hadoop" class="bx--checkbox" type="checkbox" value="hadoop" />
+                            <label for="cb-Apache Hadoop" class="bx--checkbox-label">Apache Hadoop</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Apache Kafka" class="bx--checkbox" type="checkbox" value="kafka" />
+                            <label for="cb-Apache Kafka" class="bx--checkbox-label">Apache Kafka</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Apache OpenWhisk" class="bx--checkbox" type="checkbox" value="apache-openwhisk" />
+                            <label for="cb-Apache OpenWhisk" class="bx--checkbox-label">Apache OpenWhisk</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Apache Spark" class="bx--checkbox" type="checkbox" value="spark" />
+                            <label for="cb-Apache Spark" class="bx--checkbox-label">Apache Spark</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Appsody" class="bx--checkbox" type="checkbox" value="appsody" />
+                            <label for="cb-Appsody" class="bx--checkbox-label">Appsody</label>
+                          </div></div><div class="more_filters"><ul style="display:none;"><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Cloud Foundry" class="bx--checkbox" type="checkbox" value="cloud-foundry" />
+                            <label for="cb-Cloud Foundry" class="bx--checkbox-label">Cloud Foundry</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Cloud native development tools on IBM Z" class="bx--checkbox" type="checkbox" value="cloud-native-dev-tools-ibmz" />
+                            <label for="cb-Cloud native development tools on IBM Z" class="bx--checkbox-label">Cloud native development tools on IBM Z</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-containerd" class="bx--checkbox" type="checkbox" value="containerd" />
+                            <label for="cb-containerd" class="bx--checkbox-label">containerd</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-DAX - Data Asset eXchange" class="bx--checkbox" type="checkbox" value="data-asset-exchange" />
+                            <label for="cb-DAX - Data Asset eXchange" class="bx--checkbox-label">DAX - Data Asset eXchange</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Docker" class="bx--checkbox" type="checkbox" value="docker" />
+                            <label for="cb-Docker" class="bx--checkbox-label">Docker</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Eclipse MicroProfile" class="bx--checkbox" type="checkbox" value="microprofile" />
+                            <label for="cb-Eclipse MicroProfile" class="bx--checkbox-label">Eclipse MicroProfile</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Eclipse OpenJ9" class="bx--checkbox" type="checkbox" value="open-j9" />
+                            <label for="cb-Eclipse OpenJ9" class="bx--checkbox-label">Eclipse OpenJ9</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Grafana" class="bx--checkbox" type="checkbox" value="grafana" />
+                            <label for="cb-Grafana" class="bx--checkbox-label">Grafana</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Helm" class="bx--checkbox" type="checkbox" value="helm" />
+                            <label for="cb-Helm" class="bx--checkbox-label">Helm</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Hyperledger" class="bx--checkbox" type="checkbox" value="hyperledger" />
+                            <label for="cb-Hyperledger" class="bx--checkbox-label">Hyperledger</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Hyperledger Fabric" class="bx--checkbox" type="checkbox" value="hyperledger-fabric" />
+                            <label for="cb-Hyperledger Fabric" class="bx--checkbox-label">Hyperledger Fabric</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM AIX" class="bx--checkbox" type="checkbox" value="aix" />
+                            <label for="cb-IBM AIX" class="bx--checkbox-label">IBM AIX</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM API Connect" class="bx--checkbox" type="checkbox" value="api-connect" />
+                            <label for="cb-IBM API Connect" class="bx--checkbox-label">IBM API Connect</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM App Connect" class="bx--checkbox" type="checkbox" value="app-connect" />
+                            <label for="cb-IBM App Connect" class="bx--checkbox-label">IBM App Connect</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Cloud" class="bx--checkbox" type="checkbox" value="cloud-ibm" />
+                            <label for="cb-IBM Cloud" class="bx--checkbox-label">IBM Cloud</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Cloud Functions" class="bx--checkbox" type="checkbox" value="ibm-cloud-functions" />
+                            <label for="cb-IBM Cloud Functions" class="bx--checkbox-label">IBM Cloud Functions</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Cloud Pak for Applications" class="bx--checkbox" type="checkbox" value="cloud-pak-for-applications" />
+                            <label for="cb-IBM Cloud Pak for Applications" class="bx--checkbox-label">IBM Cloud Pak for Applications</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Cloud Pak for Data" class="bx--checkbox" type="checkbox" value="cloud-pak-for-data" />
+                            <label for="cb-IBM Cloud Pak for Data" class="bx--checkbox-label">IBM Cloud Pak for Data</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Cloud Pak for Integration" class="bx--checkbox" type="checkbox" value="cloud-pak-for-integration" />
+                            <label for="cb-IBM Cloud Pak for Integration" class="bx--checkbox-label">IBM Cloud Pak for Integration</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Cloud Pak for Multicloud Management" class="bx--checkbox" type="checkbox" value="cloud-pak-for-multicloud" />
+                            <label for="cb-IBM Cloud Pak for Multicloud Management" class="bx--checkbox-label">IBM Cloud Pak for Multicloud Management</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Cloud Private" class="bx--checkbox" type="checkbox" value="cloud-private" />
+                            <label for="cb-IBM Cloud Private" class="bx--checkbox-label">IBM Cloud Private</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Cloudant Local (NoSQL)" class="bx--checkbox" type="checkbox" value="no-sql" />
+                            <label for="cb-IBM Cloudant Local (NoSQL)" class="bx--checkbox-label">IBM Cloudant Local (NoSQL)</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Db2 Database" class="bx--checkbox" type="checkbox" value="ibm-db2-database" />
+                            <label for="cb-IBM Db2 Database" class="bx--checkbox-label">IBM Db2 Database</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Db2 Event Store" class="bx--checkbox" type="checkbox" value="ibm-db2-event-store" />
+                            <label for="cb-IBM Db2 Event Store" class="bx--checkbox-label">IBM Db2 Event Store</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Db2 Warehouse" class="bx--checkbox" type="checkbox" value="ibm-db2-warehouse" />
+                            <label for="cb-IBM Db2 Warehouse" class="bx--checkbox-label">IBM Db2 Warehouse</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Edge Application Manager" class="bx--checkbox" type="checkbox" value="ibm-edge-application-manager" />
+                            <label for="cb-IBM Edge Application Manager" class="bx--checkbox-label">IBM Edge Application Manager</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Event Streams" class="bx--checkbox" type="checkbox" value="event-streams" />
+                            <label for="cb-IBM Event Streams" class="bx--checkbox-label">IBM Event Streams</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Hyper Protect" class="bx--checkbox" type="checkbox" value="hyper-protect" />
+                            <label for="cb-IBM Hyper Protect" class="bx--checkbox-label">IBM Hyper Protect</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM i" class="bx--checkbox" type="checkbox" value="ibm-i" />
+                            <label for="cb-IBM i" class="bx--checkbox-label">IBM i</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM LinuxONE" class="bx--checkbox" type="checkbox" value="ibm-linuxone" />
+                            <label for="cb-IBM LinuxONE" class="bx--checkbox-label">IBM LinuxONE</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Maximo" class="bx--checkbox" type="checkbox" value="maximo" />
+                            <label for="cb-IBM Maximo" class="bx--checkbox-label">IBM Maximo</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Maximo Visual Inspection" class="bx--checkbox" type="checkbox" value="maximo-visual-inspection" />
+                            <label for="cb-IBM Maximo Visual Inspection" class="bx--checkbox-label">IBM Maximo Visual Inspection</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Mobile Foundation" class="bx--checkbox" type="checkbox" value="ibm-mobile-foundation" />
+                            <label for="cb-IBM Mobile Foundation" class="bx--checkbox-label">IBM Mobile Foundation</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM MQ" class="bx--checkbox" type="checkbox" value="ibm-mq" />
+                            <label for="cb-IBM MQ" class="bx--checkbox-label">IBM MQ</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Power Systems" class="bx--checkbox" type="checkbox" value="ibm-power" />
+                            <label for="cb-IBM Power Systems" class="bx--checkbox-label">IBM Power Systems</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM PowerAI" class="bx--checkbox" type="checkbox" value="ibm-power-ai" />
+                            <label for="cb-IBM PowerAI" class="bx--checkbox-label">IBM PowerAI</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM SPSS Modeler" class="bx--checkbox" type="checkbox" value="spss-modeler" />
+                            <label for="cb-IBM SPSS Modeler" class="bx--checkbox-label">IBM SPSS Modeler</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM SPSS Statistics" class="bx--checkbox" type="checkbox" value="spss" />
+                            <label for="cb-IBM SPSS Statistics" class="bx--checkbox-label">IBM SPSS Statistics</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Sterling" class="bx--checkbox" type="checkbox" value="sterling" />
+                            <label for="cb-IBM Sterling" class="bx--checkbox-label">IBM Sterling</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM TRIRIGA" class="bx--checkbox" type="checkbox" value="tririga" />
+                            <label for="cb-IBM TRIRIGA" class="bx--checkbox-label">IBM TRIRIGA</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Visual Insights" class="bx--checkbox" type="checkbox" value="ibm-visual-insights" />
+                            <label for="cb-IBM Visual Insights" class="bx--checkbox-label">IBM Visual Insights</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM Z" class="bx--checkbox" type="checkbox" value="ibmz" />
+                            <label for="cb-IBM Z" class="bx--checkbox-label">IBM Z</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-IBM z/OS" class="bx--checkbox" type="checkbox" value="zos" />
+                            <label for="cb-IBM z/OS" class="bx--checkbox-label">IBM z/OS</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Istio" class="bx--checkbox" type="checkbox" value="istio" />
+                            <label for="cb-Istio" class="bx--checkbox-label">Istio</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Jakarta EE" class="bx--checkbox" type="checkbox" value="jakarta" />
+                            <label for="cb-Jakarta EE" class="bx--checkbox-label">Jakarta EE</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-JanusGraph" class="bx--checkbox" type="checkbox" value="janusgraph" />
+                            <label for="cb-JanusGraph" class="bx--checkbox-label">JanusGraph</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Java Platform" class="bx--checkbox" type="checkbox" value="java-platform" />
+                            <label for="cb-Java Platform" class="bx--checkbox-label">Java Platform</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Jupyter Notebook" class="bx--checkbox" type="checkbox" value="jupyter" />
+                            <label for="cb-Jupyter Notebook" class="bx--checkbox-label">Jupyter Notebook</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Keras" class="bx--checkbox" type="checkbox" value="keras" />
+                            <label for="cb-Keras" class="bx--checkbox-label">Keras</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Knative" class="bx--checkbox" type="checkbox" value="knative" />
+                            <label for="cb-Knative" class="bx--checkbox-label">Knative</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Kubernetes" class="bx--checkbox" type="checkbox" value="kubernetes" />
+                            <label for="cb-Kubernetes" class="bx--checkbox-label">Kubernetes</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-LoopBack" class="bx--checkbox" type="checkbox" value="loopback" />
+                            <label for="cb-LoopBack" class="bx--checkbox-label">LoopBack</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-MAX - Model Asset eXchange" class="bx--checkbox" type="checkbox" value="model-asset-exchange" />
+                            <label for="cb-MAX - Model Asset eXchange" class="bx--checkbox-label">MAX - Model Asset eXchange</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Microclimate" class="bx--checkbox" type="checkbox" value="microclimate" />
+                            <label for="cb-Microclimate" class="bx--checkbox-label">Microclimate</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-MQTT" class="bx--checkbox" type="checkbox" value="mqtt" />
+                            <label for="cb-MQTT" class="bx--checkbox-label">MQTT</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Netezza Performance Server" class="bx--checkbox" type="checkbox" value="netezza-performance-server" />
+                            <label for="cb-Netezza Performance Server" class="bx--checkbox-label">Netezza Performance Server</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Node-RED" class="bx--checkbox" type="checkbox" value="node-red" />
+                            <label for="cb-Node-RED" class="bx--checkbox-label">Node-RED</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Open Liberty" class="bx--checkbox" type="checkbox" value="open-liberty" />
+                            <label for="cb-Open Liberty" class="bx--checkbox-label">Open Liberty</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-OpenJDK" class="bx--checkbox" type="checkbox" value="open-jdk" />
+                            <label for="cb-OpenJDK" class="bx--checkbox-label">OpenJDK</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-PixieDust" class="bx--checkbox" type="checkbox" value="pixiedust" />
+                            <label for="cb-PixieDust" class="bx--checkbox-label">PixieDust</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Prometheus" class="bx--checkbox" type="checkbox" value="prometheus" />
+                            <label for="cb-Prometheus" class="bx--checkbox-label">Prometheus</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Python Data Analysis Library" class="bx--checkbox" type="checkbox" value="pandas" />
+                            <label for="cb-Python Data Analysis Library" class="bx--checkbox-label">Python Data Analysis Library</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-PyTorch" class="bx--checkbox" type="checkbox" value="pytorch" />
+                            <label for="cb-PyTorch" class="bx--checkbox-label">PyTorch</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-RabbitMQ" class="bx--checkbox" type="checkbox" value="rabbitmq" />
+                            <label for="cb-RabbitMQ" class="bx--checkbox-label">RabbitMQ</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-React" class="bx--checkbox" type="checkbox" value="react" />
+                            <label for="cb-React" class="bx--checkbox-label">React</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Red Hat OpenShift on IBM Cloud" class="bx--checkbox" type="checkbox" value="redhat-openshift-ibm-cloud" />
+                            <label for="cb-Red Hat OpenShift on IBM Cloud" class="bx--checkbox-label">Red Hat OpenShift on IBM Cloud</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Tekton" class="bx--checkbox" type="checkbox" value="tekton" />
+                            <label for="cb-Tekton" class="bx--checkbox-label">Tekton</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-TensorFlow" class="bx--checkbox" type="checkbox" value="tensorflow" />
+                            <label for="cb-TensorFlow" class="bx--checkbox-label">TensorFlow</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Watson APIs" class="bx--checkbox" type="checkbox" value="watson-apis" />
+                            <label for="cb-Watson APIs" class="bx--checkbox-label">Watson APIs</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Watson Assistant" class="bx--checkbox" type="checkbox" value="watson-assistant" />
+                            <label for="cb-Watson Assistant" class="bx--checkbox-label">Watson Assistant</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Watson Discovery" class="bx--checkbox" type="checkbox" value="watson-discovery" />
+                            <label for="cb-Watson Discovery" class="bx--checkbox-label">Watson Discovery</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Watson Machine Learning Accelerator" class="bx--checkbox" type="checkbox" value="watson-ml-accelerator" />
+                            <label for="cb-Watson Machine Learning Accelerator" class="bx--checkbox-label">Watson Machine Learning Accelerator</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Watson OpenScale" class="bx--checkbox" type="checkbox" value="watson-openscale" />
+                            <label for="cb-Watson OpenScale" class="bx--checkbox-label">Watson OpenScale</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Watson Studio" class="bx--checkbox" type="checkbox" value="watson-studio" />
+                            <label for="cb-Watson Studio" class="bx--checkbox-label">Watson Studio</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Watson Visual Recognition" class="bx--checkbox" type="checkbox" value="watson-visual-recognition" />
+                            <label for="cb-Watson Visual Recognition" class="bx--checkbox-label">Watson Visual Recognition</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-z/OS Connect" class="bx--checkbox" type="checkbox" value="zos-connect" />
+                            <label for="cb-z/OS Connect" class="bx--checkbox-label">z/OS Connect</label>
+                          </div></ul><a class="see_more" href="#">Show more</a></div></nav><nav class="filter-group"><h4>Deployment Models</h4><div class="cbs"><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Cloud" class="bx--checkbox" type="checkbox" value="cloud" />
+                            <label for="cb-Cloud" class="bx--checkbox-label">Cloud</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-Edge computing" class="bx--checkbox" type="checkbox" value="edge-computing" />
+                            <label for="cb-Edge computing" class="bx--checkbox-label">Edge computing</label>
+                          </div><div class="bx--form-item bx--checkbox-wrapper">
+                            <input id="cb-On premises" class="bx--checkbox" type="checkbox" value="on-prem" />
+                            <label for="cb-On premises" class="bx--checkbox-label">On premises</label>
+                          </div></div></nav>
+                </div>
+              </div>
+            </div></div>
+	<div class="search-results">
+		<div class="restrictContentWrap">
+			<div class="search-results-msg">
+					<p>
+					Showing 1 - 25 of 29 results				</p>
+				<div class="bx--form-item">
+				  <div class="bx--select">
+				    <!-- <label for="select-id" class="bx--label">Sort by</label> -->
+				    <div class="bx--select-input__wrapper">
+							<select name="orderandby" id="orderSelection" class="bx--select-input">
+								<option class="bx--select-option" value="desc:date"  selected>Sort: Date Newest to Oldest</option>
+								<option class="bx--select-option" value="asc:date" >Sort: Date Oldest to Newest</option>
+																<option class="bx--select-option" value="asc:title" >Sort: Title A->Z</option>
+								<option class="bx--select-option" value="desc:title" >Sort: Title Z->A</option>
+																<option class="bx--select-option" value="desc:relevance" >Sort: Sort: Most Relevant</option>
+								<option class="bx--select-option" value="asc:relevance" >Sort: Least Relevant</option>
+							</select>
+							<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--select__arrow" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M5 6L0 1 .7.3 5 4.6 9.3.3l.7.7z"></path></svg>
+				    </div>
+				  </div>
+				</div>
+			</div>
+
+			<section class="search-results-container">
+				
+<article id="post-72610" class="code_search_result post-72610 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-keras category-model-asset-exchange category-tensorflow category-time-series-prediction-model ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-keras ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-tensorflow ibmcode_model_assets_category-time-series-prediction-model">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-weather-forecaster/" rel="bookmark">Weather Forecaster</a></h3>	<p class="excerpt">
+		Predict hourly weather features given historical data for a specific location	</p>
+	<p class="date">Updated May 26, 2020 | Published September 21, 2018</p></article>
+
+<article id="post-211384" class="code_search_result post-211384 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-docker category-model-asset-exchange category-recommender-model category-tensorflow ibmcode_subtype-deployable ibmcode_subtype-trainable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-docker ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-recommender-model ibmcode_model_assets_category-tensorflow">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-recommender/" rel="bookmark">Recommender System</a></h3>	<p class="excerpt">
+		Generate personalized recommendations	</p>
+	<p class="date">Published May 4, 2020</p></article>
+
+<article id="post-166347" class="code_search_result post-166347 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-docker category-image-text-translation-model category-model-asset-exchange tag-featured ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-text-translation-model ibmcode_model_assets_category-model-asset-exchange">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-ocr/" rel="bookmark">Optical Character Recognition</a></h3>	<p class="excerpt">
+		Identify text in an image.	</p>
+	<p class="date">Published November 4, 2019</p></article>
+
+<article id="post-147940" class="code_search_result post-147940 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-language-modeling-model category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing category-tensorflow ibmcode_subtype-deployable ibmcode_subtype-trainable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-language-modeling-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model ibmcode_model_assets_category-tensorflow">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-question-answering/" rel="bookmark">Question Answering</a></h3>	<p class="excerpt">
+		Answer questions on a given corpus of text	</p>
+	<p class="date">Published September 17, 2019</p></article>
+
+<article id="post-140333" class="code_search_result post-140333 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing category-serverless category-tensorflow ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model ibmcode_model_assets_category-serverless ibmcode_model_assets_category-tensorflow">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-text-summarizer/" rel="bookmark">Text Summarizer</a></h3>	<p class="excerpt">
+		Generate a summarized description of a body of text	</p>
+	<p class="date">Published July 9, 2019</p></article>
+
+<article id="post-140280" class="code_search_result post-140280 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-docker category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing category-serverless category-text-classification-model tag-featured ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-docker ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model ibmcode_model_assets_category-serverless ibmcode_model_assets_category-text-classification-model">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-toxic-comment-classifier/" rel="bookmark">Toxic Comment Classifier</a></h3>	<p class="excerpt">
+		Detect 6 types of toxicity in user comments	</p>
+	<p class="date">Published June 4, 2019</p></article>
+
+<article id="post-240732" class="code_search_result post-240732 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-docker category-machine-learning category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing category-serverless category-text-feature-extraction-model ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-docker ibmcode_model_assets_category-machine-learning ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model ibmcode_model_assets_category-serverless ibmcode_model_assets_category-text-feature-extraction-model">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-chinese-phonetic-similarity-estimator/" rel="bookmark">Chinese Phonetic Similarity Estimator</a></h3>	<p class="excerpt">
+		Estimate the phonetic distance between Chinese words and get similar sounding candidate words.	</p>
+	<p class="date">Published May 28, 2019</p></article>
+
+<article id="post-117038" class="code_search_result post-117038 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-image-translation-model category-model-asset-exchange category-tensorflow category-vision ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-translation-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-tensorflow ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-image-resolution-enhancer/" rel="bookmark">Image Resolution Enhancer</a></h3>	<p class="excerpt">
+		Upscale an image by a factor of 4, while generating photo-realistic details.	</p>
+	<p class="date">Updated March 29, 2019 | Published March 25, 2019</p></article>
+
+<article id="post-117039" class="code_search_result post-117039 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing category-serverless category-tensorflow category-text-classification-model tag-featured ibmcode_subtype-deployable ibmcode_subtype-trainable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model ibmcode_model_assets_category-serverless ibmcode_model_assets_category-tensorflow ibmcode_model_assets_category-text-classification-model">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-text-sentiment-classifier/" rel="bookmark">Text Sentiment Classifier</a></h3>	<p class="excerpt">
+		Detect the sentiment captured in short pieces of text	</p>
+	<p class="date">Updated March 29, 2019 | Published March 25, 2019</p></article>
+
+<article id="post-117449" class="code_search_result post-117449 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-image-classification-model category-keras category-model-asset-exchange category-image-object-detection-model category-serverless category-vision ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-classification-model ibmcode_model_assets_category-keras ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-image-object-detection-model ibmcode_model_assets_category-serverless ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-nucleus-segmenter/" rel="bookmark">Nucleus Segmenter</a></h3>	<p class="excerpt">
+		Identify nuclei in a microscopy image and assign each pixel of the image to a particular nucleus	</p>
+	<p class="date">Published March 28, 2019</p></article>
+
+<article id="post-117087" class="code_search_result post-117087 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-audio-modeling-model category-deep-learning category-docker category-model-asset-exchange category-natural-language-processing category-serverless category-speech-and-empathy category-tensorflow ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-audio-modeling-model ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-serverless ibmcode_model_assets_category-speech-and-empathy ibmcode_model_assets_category-tensorflow">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-speech-to-text-converter/" rel="bookmark">Speech to Text Converter</a></h3>	<p class="excerpt">
+		Converts spoken words into text form.	</p>
+	<p class="date">Published March 27, 2019</p></article>
+
+<article id="post-76833" class="code_search_result post-76833 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-image-feature-extraction-model category-model-asset-exchange category-image-object-detection-model category-serverless category-tensorflow category-vision ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-feature-extraction-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-image-object-detection-model ibmcode_model_assets_category-serverless ibmcode_model_assets_category-tensorflow ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-human-pose-estimator/" rel="bookmark">Human Pose Estimator</a></h3>	<p class="excerpt">
+		Detect humans in an image and estimate the pose for each person.	</p>
+	<p class="date">Published December 12, 2018</p></article>
+
+<article id="post-73974" class="code_search_result post-73974 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-keras category-language-modeling-model category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing category-serverless ibmcode_subtype-deployable ibmcode_subtype-trainable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-keras ibmcode_model_assets_category-language-modeling-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model ibmcode_model_assets_category-serverless">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-named-entity-tagger/" rel="bookmark">Named Entity Tagger</a></h3>	<p class="excerpt">
+		Locate and tag named entities in text.	</p>
+	<p class="date">Published October 31, 2018</p></article>
+
+<article id="post-72598" class="code_search_result post-72598 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-image-translation-model category-model-asset-exchange category-pytorch category-vision ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-translation-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-pytorch ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-fast-neural-style-transfer/" rel="bookmark">Fast Neural Style Transfer</a></h3>	<p class="excerpt">
+		Generate a new image that mixes the content of a source image with the style of another image.	</p>
+	<p class="date">Updated September 21, 2018 | Published March 20, 2018</p></article>
+
+<article id="post-72600" class="code_search_result post-72600 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-image-classification-model category-model-asset-exchange category-image-object-detection-model category-serverless category-tensorflow category-vision tag-featured ibmcode_subtype-deployable ibmcode_subtype-trainable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-classification-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-image-object-detection-model ibmcode_model_assets_category-serverless ibmcode_model_assets_category-tensorflow ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-image-segmenter/" rel="bookmark">Image Segmenter</a></h3>	<p class="excerpt">
+		Identify objects in an image, additionally assigning each pixel of the image to a particular object.	</p>
+	<p class="date">Updated September 21, 2018 | Published July 12, 2018</p></article>
+
+<article id="post-72603" class="code_search_result post-72603 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-language-modeling-model category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing category-tensorflow ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-language-modeling-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model ibmcode_model_assets_category-tensorflow">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-news-text-generator/" rel="bookmark">News Text Generator</a></h3>	<p class="excerpt">
+		Generate English-language text similar to the news articles in the One Billion Words data set.	</p>
+	<p class="date">Updated September 21, 2018 | Published March 20, 2018</p></article>
+
+<article id="post-72604" class="code_search_result post-72604 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-image-classification-model category-model-asset-exchange category-image-object-detection-model category-serverless category-tensorflow category-vision tag-featured ibmcode_subtype-deployable ibmcode_subtype-trainable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-classification-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-image-object-detection-model ibmcode_model_assets_category-serverless ibmcode_model_assets_category-tensorflow ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-object-detector/" rel="bookmark">Object Detector</a></h3>	<p class="excerpt">
+		Localize and identify multiple objects in a single image.	</p>
+	<p class="date">Updated September 21, 2018 | Published March 20, 2018</p></article>
+
+<article id="post-72605" class="code_search_result post-72605 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-image-classification-model category-keras category-model-asset-exchange category-serverless category-vision ibmcode_subtype-deployable ibmcode_subtype-trainable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-classification-model ibmcode_model_assets_category-keras ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-serverless ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-resnet-50/" rel="bookmark">Image Classifier &#8211; ResNet50</a></h3>	<p class="excerpt">
+		Identify objects in images using a first-generation deep residual network.	</p>
+	<p class="date">Updated September 21, 2018 | Published March 20, 2018</p></article>
+
+<article id="post-72606" class="code_search_result post-72606 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-keras category-language-modeling-model category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-keras ibmcode_model_assets_category-language-modeling-model ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-review-text-generator/" rel="bookmark">Review Text Generator</a></h3>	<p class="excerpt">
+		Generate English-language text similar to the text in the Yelp® review data set.	</p>
+	<p class="date">Updated September 21, 2018 | Published March 20, 2018</p></article>
+
+<article id="post-72609" class="code_search_result post-72609 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-model-asset-exchange category-serverless category-tensorflow category-video-classification-model category-vision ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-serverless ibmcode_model_assets_category-tensorflow ibmcode_model_assets_category-video-classification-model ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-sports-video-classifier/" rel="bookmark">Sports Video Classifier</a></h3>	<p class="excerpt">
+		Classify sporting activities in videos.	</p>
+	<p class="date">Updated September 21, 2018 | Published March 20, 2018</p></article>
+
+<article id="post-72611" class="code_search_result post-72611 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-model-asset-exchange category-natural-language-processing-model category-natural-language-processing category-tensorflow category-text-feature-extraction-model ibmcode_subtype-trainable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-natural-language-processing ibmcode_model_assets_category-natural-language-processing-model ibmcode_model_assets_category-tensorflow ibmcode_model_assets_category-text-feature-extraction-model">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-word-embedding-generator/" rel="bookmark">Word Embedding Generator</a></h3>	<p class="excerpt">
+		Generates word embedding vectors from text files.	</p>
+	<p class="date">Updated September 21, 2018 | Published July 12, 2018</p></article>
+
+<article id="post-72613" class="code_search_result post-72613 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-audio-classification-model category-deep-learning category-docker category-keras category-model-asset-exchange category-serverless category-tensorflow tag-featured ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-audio-classification-model ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-keras ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-serverless ibmcode_model_assets_category-tensorflow">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-audio-classifier/" rel="bookmark">Audio Classifier</a></h3>	<p class="excerpt">
+		Identify sounds in short audio clips.	</p>
+	<p class="date">Updated September 21, 2018 | Published July 12, 2018</p></article>
+
+<article id="post-72614" class="code_search_result post-72614 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-audio-feature-extraction-model category-deep-learning category-docker category-model-asset-exchange ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-audio-feature-extraction-model ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-model-asset-exchange">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-audio-embedding-generator/" rel="bookmark">Audio Embedding Generator</a></h3>	<p class="excerpt">
+		Generate embedding vectors from audio files.	</p>
+	<p class="date">Updated September 21, 2018 | Published July 12, 2018</p></article>
+
+<article id="post-72615" class="code_search_result post-72615 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-audio-modeling-model category-deep-learning category-docker category-model-asset-exchange category-tensorflow ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-audio-modeling-model ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-tensorflow">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-audio-sample-generator/" rel="bookmark">Audio Sample Generator</a></h3>	<p class="excerpt">
+		Generate short audio clips of speech commands and lo-fi instrumental samples.	</p>
+	<p class="date">Published September 21, 2018</p></article>
+
+<article id="post-72616" class="code_search_result post-72616 ibmcode_model_assets type-ibmcode_model_assets status-publish hentry category-artificial-intelligence category-deep-learning category-docker category-image-classification-model category-keras category-model-asset-exchange category-serverless category-vision ibmcode_subtype-deployable ibmcode_collections-codait ibmcode_model_assets_category-artificial-intelligence ibmcode_model_assets_category-deep-learning ibmcode_model_assets_category-docker ibmcode_model_assets_category-image-classification-model ibmcode_model_assets_category-keras ibmcode_model_assets_category-model-asset-exchange ibmcode_model_assets_category-serverless ibmcode_model_assets_category-vision">
+	<p class="type">
+		Model	</p>
+		<h3 class="title"><a href="/exchanges/models/all/max-breast-cancer-mitosis-detector/" rel="bookmark">Breast Cancer Mitosis Detector</a></h3>	<p class="excerpt">
+		Detect whether a mitosis exists in an image of breast cancer tumor cells.	</p>
+	<p class="date">Updated September 21, 2018 | Published July 12, 2018</p></article>
+<div class="bx--grid">
+							<div class="bx--row">
+								<div class="bx--col-sm-12 bx--col-md-12 bx--col-lg-12"><div class="pagination"><div class="bx--pagination" data-pagination id="cpt-carbon-pagination">
+  <div class="bx--pagination__left">
+    <label id="select-id-pagination-count-label" class="bx--pagination__text" for="select-id-pagination-count">
+      Items per page: 25
+    </label>
+    <span class="bx--pagination__text">
+      <span data-displayed-item-range>1-25</span> of
+      <span data-total-items>
+          29
+      </span> items
+    </span>
+  </div>
+  <div class="bx--pagination__right">
+    <div class="bx--select bx--select--inline bx--select__page-number">
+      <select id="cpt-carbon-pagination-select" class="bx--select-input" data-page-number-input><option class="bx--select-option" selected value="">1</option><option class="bx--select-option" value="/page/2?s&#038;category_name=artificial-intelligence&#038;type=models">2</option></select>
+      <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--select__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"></path></svg>
+    </div>
+    <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
+      of 2 pages
+    </label>
+    <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward aria-label="previous page">
+      <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M19 23l-8-7 8-7v14z"></path></svg>
+    </button>
+    <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward aria-label="next page">
+      <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M13 9l8 7-8 7V9z"></path></svg>
+    </button>
+  </div>
+</div></div><p>&nbsp;</p></div></div></div>			</section>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function(){
+			var $cptPaginationSelect = document.getElementById('cpt-carbon-pagination-select'),
+					$cptPaginationButtons = document.querySelectorAll('#cpt-carbon-pagination button'),
+					$filterForm = document.getElementById('code_search__form_body'),
+					$filterFormCats = document.getElementById('frm_category_name'),
+					$orderSelection = document.getElementById('orderSelection'),
+					$filterFormTypes = document.getElementById('frm_ptypes'),
+					$order = document.getElementById('frm_order'),
+					$orderBy = document.getElementById('frm_orderby'),
+					submitTimer = null,
+					$leftNav = document.getElementById('search_leftnav');
+					// $filtersSelected = document.querySelectorAll('#code_leftnav [type="checkbox"]:checked');
+
+					ibmcode.addEvent($orderSelection,'change',function(){
+						$orderGroup = this.value.split(":");
+						$order.value = $orderGroup[0];
+						$orderBy.value = $orderGroup[1];
+						$filterForm.submit();
+					});
+
+					ibmcode.addEvent($leftNav,'change',function(){
+						$filtersSelected = $leftNav.querySelectorAll('.filter-group [type="checkbox"]:checked');
+						var filterLinkElms = "";
+						[].forEach.call( $filtersSelected, function(el) {
+		          if(el.checked){
+		            filterLinkElms += el.value + ',';
+		          };
+		        });
+						$filterFormCats.value = filterLinkElms.replace(/,\s*$/, "");
+						//get the content types
+						$typesSelected = $leftNav.querySelectorAll('.content-group [type="checkbox"]:checked');
+						var contentLinkElms = "";
+						[].forEach.call( $typesSelected, function(el) {
+		          if(el.checked){
+		            contentLinkElms += el.value + ',';
+		          };
+		        });
+						$filterFormTypes.value = contentLinkElms.replace(/,\s*$/, "");
+						$filterForm.submit();
+		      });
+
+					$moreTriggers = document.querySelectorAll('.more_filters .see_more');
+					[].forEach.call( $moreTriggers, function(el) {
+						ibmcode.addEvent(el,'click',function(e){
+							e.preventDefault();
+							if( e.target.closest('.more_filters').classList.contains('open') ){
+								e.target.closest('.more_filters').classList.remove('open');
+								e.target.innerHTML = "Show more";
+							}else{
+								e.target.closest('.more_filters').classList.add('open');
+								e.target.innerHTML = "Show less";
+							}
+
+							return false;
+						});
+					});
+
+
+			if($cptPaginationButtons && $cptPaginationButtons.length > 0 && $cptPaginationSelect != null){
+				[].forEach.call( $cptPaginationButtons, function(el) {
+					ibmcode.addEvent(el,'click',function(event){
+						event = event || window.event;
+						if(this.getAttribute('data-page-backward') != null){
+							//get the current index, substract 1 and see if its >= 0
+							var myMath = ($cptPaginationSelect.selectedIndex - 1);
+							if( myMath >= 0 ){
+								$cptPaginationSelect.selectedIndex = myMath;
+								var newEvent = new Event('change');
+								$cptPaginationSelect.dispatchEvent(newEvent);
+							}
+						}else if(this.getAttribute('data-page-forward') != null){
+							var myMath = ($cptPaginationSelect.selectedIndex + 1);
+							if($cptPaginationSelect.options[myMath]){
+								$cptPaginationSelect.selectedIndex = myMath;
+								var event = new Event('change');
+								$cptPaginationSelect.dispatchEvent(event);
+							}
+						};
+					});
+				});
+			}
+			if($cptPaginationSelect){
+				ibmcode.addEvent($cptPaginationSelect,'change',function(event){
+					event = event || window.event;
+					$filterForm.action = this[this.selectedIndex].value;
+					$filterForm.submit();
+				});
+			}
+		});
+	</script>
+</div>
+</div>
+</div>
+
+<div class="container_footer">
+	<footer role="contentinfo" aria-label="IBM Developer Footer">
+    		<!-- developer footer here -->
+		<div id="code-footer"class="code-footer">
+      <div class="ibm-logo">
+        <a href="//www.ibm.com">
+          <svg class="Footer-module--logo--3otJM" width="81" height="32" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><path d="M0 32h15.689v-2.038H0zM0 27.721h15.689v-2.038H0zM4.483 23.442h6.724v-2.037H4.483zM4.483 19.164h6.724v-2.038H4.483zM4.483 14.885h6.724v-2.037H4.483zM4.482 10.606h6.724V8.568H4.482zM0 6.327h15.689V4.29H0zM0 2.049h15.689V.011H0zM17.93 29.963V32h16.504a8.521 8.521 0 0 0 5.54-2.037H17.93zM17.93 25.683v2.038h23.914a8.535 8.535 0 0 0 .85-2.038H17.93zM22.412 23.442h6.724v-2.037h-6.724zM40.124 17.126H22.412v2.038H41.77a8.62 8.62 0 0 0-1.645-2.038M22.413 12.848v2.036h17.786a8.612 8.612 0 0 0 1.644-2.037h-19.43zM42.693 6.327a8.447 8.447 0 0 0-.85-2.037H17.93v2.037h24.763zM39.974 2.049a8.521 8.521 0 0 0-5.54-2.037H17.93v2.037h22.044zM22.412 10.606h6.724V8.568h-6.724zM35.453 10.606h7.29a8.603 8.603 0 0 0 .248-2.038h-7.538v2.038zM35.453 21.405v2.037h7.538c0-.703-.09-1.384-.248-2.037h-7.29zM57.457 0H44.825v2.038h13.34zM44.826 32h11.21v-2.038h-11.21zM44.826 27.72h11.21v-2.038h-11.21zM49.309 23.439h6.727v-2.038h-6.727zM49.309 19.159h6.727v-2.038h-6.727zM69.488 32h11.21v-2.038h-11.21zM69.488 27.72h11.21v-2.038h-11.21zM69.488 23.439h6.726v-2.038h-6.726zM69.487 19.159h6.726v-2.038h-6.726zM69.488 14.879h6.726V12.84H63.606l-.707 2.038h5.903l.686-1.94zM61.916 12.84H49.31v2.039h6.726v-1.94l.686 1.94h5.903zM76.213 8.56H65.091l-.707 2.038h11.83zM68.06 0l-.706 2.038h13.344V0zM62.757 32l.72-2.038h-1.432zM61.254 27.72h3.015l.72-2.038h-4.455zM59.743 23.44h6.037l.72-2.039h-7.476zM58.232 19.159h9.06l.719-2.038h-10.5zM49.309 10.598h11.83l-.707-2.038H49.309zM65.868 6.318h14.83V4.28H66.576zM58.947 4.28H44.826v2.038h14.828z"></path></g></svg>
+        </a>
+        <div class="slogan">
+          <a href="https://developer.ibm.com">
+            <span>
+              <span>Build</span>
+              <span>Smart<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><polygon points="24.59 16.59 17 24.17 17 2 15 2 15 24.17 7.41 16.59 6 18 16 28 26 18 24.59 16.59"></polygon><title>Arrow down</title></svg></span>
+            </span>
+            <span>
+              <span>Build</span>
+              <span>Secure<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" style="will-change: transform;"><polygon points="16 4 6 14 7.41 15.41 15 7.83 15 30 17 30 17 7.83 24.59 15.41 26 14 16 4"></polygon><title>Arrow up</title></svg></span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="bx--grid">
+					<div class="bx--row">
+            <div class="bx--col-sm-2 bx--col-md-3 bx--col-lg-3">
+              <ul>
+                <li class="heading">IBM Developer</li>
+								<li><a href="//developer.ibm.com/about/?lang=en">About</a></li>
+                      <li><a href="//developer.ibm.com/feedback/">FAQ</a></li>
+                      <li><a href="//www.ibm.com/developerworks/secure/report/">Report abuse</a></li>
+                      <li><a href="//developer.ibm.com/terms/third-party-notice/">Third-party notice</a></li>							</ul>
+						</div>
+            <div class="bx--col-sm-2 bx--col-md-3 bx--col-lg-3">
+							<ul class="tr">
+                <li class="heading">Follow Us</li>
+                <li><a href="https://twitter.com/IBMDeveloper">Twitter</a></li>
+                <li><a href="https://www.linkedin.com/showcase/developerworks/">LinkedIn</a></li>
+                <li><a href="https://www.facebook.com/IBMDeveloper">Facebook</a></li>
+                <li><a href="https://www.youtube.com/channel/UCUm6InQvGI9-6vo1teGWINA">YouTube</a></li>							</ul>
+						</div>
+            <div class="bx--col-sm-2 bx--col-md-3 bx--col-lg-3">
+							<ul>
+								<li class="heading">Explore</li>
+								<li><a href="/newsletters/">Newsletters</a></li>
+                  <li><a href="/patterns/">Code patterns</a></li>
+                  <li><a href="/articles/">Articles</a></li>
+                  <li><a href="/tutorials/">Tutorials</a></li>
+                  <li><a href="https://www.ibm.com/opensource/open-projects/">Open source projects</a></li>
+                  <li><a href="/videos/">Videos</a></li>
+                  <li><a href="/events/">Events</a></li>
+                  <li><a href="/cities/">Cities</a></li>							</ul>
+						</div>
+						<div class="bx--col-sm-2 bx--col-md-3 bx--col-lg-3">
+              <ul class="tr">
+								<li class="heading">Select a language</li>
+								<li><a href="//developer.ibm.com/">English</a></li>
+                  <li><a href="//www.ibm.com/developerworks/cn/">中文</a></li>
+                  <li><a href="//www.ibm.com/developerworks/jp/">日本語</a></li>
+                  <li><a href="//www.ibm.com/developerworks/br/">Português</a></li>
+                  <li><a href="//www.ibm.com/developerworks/ssa/">Español</a></li>
+                  <li><a href="//developer.ibm.com/kr/">한글</a></li>							</ul>
+						</div>
+					</div>
+				</div>
+      </div>
+    </div>
+    <!-- end of default footer -->
+    
+			<div class="code_content__wrap">
+
+			</div>
+		</div>
+		<!-- ibm footer here -->
+		<div aria-label="IBM Global Footer" class="dw-footer" id="dw-footer">
+			<div class="code_content__wrap">
+					<div class="dw-footer-corporate-links">
+							<ul>
+									<li><a href="//developer.ibm.com/community/">Community</a></li>
+                  <li><a href="//www.ibm.com/privacy/us/en/">Privacy</a></li>
+                  <li><a href="//developer.ibm.com/terms/ibm-developer-terms-of-use/">Terms of use</a></li>
+                  <li><a href="//www.ibm.com/accessibility/us/en/">Accessibility</a></li>									<li id="ibm-truste-cp"><a onclick="truste.eu.clickListener();return false;" href="#">Cookie preferences</a></li>
+							</ul>
+					</div>
+					<div id="ibm-footer-locale-selector"></div>
+			</div>
+		</div>
+    <button
+          value="Site feedback"
+          id="Site-feedback-btn-id"
+          onclick="KAMPYLE_ONSITE_SDK.showForm(260)"
+          form="myform" style="position: fixed; cursor: pointer; font-weight: 300; font-size: 16px; line-height: 26px; outline: 0px; text-align: center; height: 32px; padding: 0px 16px; right: 0px; top: 150px; bottom: auto; z-index: 800; transform: rotate(-90deg); transform-origin: 100% 100%; background-color: rgb(255, 255, 255); border: 1px solid rgb(15, 98, 254); color: rgb(15, 98, 254); margin: 0px !important;">
+            Site feedback
+        </button>  </footer>
+</div>
+
+<div id="notificationDrawer"></div>
+
+<style>
+	#modal-k7naq0vevup .bx--modal-container,
+  #challengeModal  .bx--modal-container{
+		max-width: 980px !important;
+		padding:0 !important;
+		height: 75% !important;
+	}
+  #challengeModal  .bx--modal-container{
+    height: 90% !important;
+    max-height: 90% !important;
+    border-color: #41a8a5;
+  }
+	#modal-k7naq0vevup .bx--modal-content,
+  #challengeModal .bx--modal-content{
+		margin-bottom: 0;
+		height: 100%;
+	}
+	#modal-k7naq0vevup .bx--modal-container iframe,
+  #challengeModal .bx--modal-container iframe{
+		height:100%;
+	}
+</style>
+
+<div id="challengeModal">
+  <div id="challengeIframeWrap">
+    <div class="challenge--modal-header">
+      <button class="challenge--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
+        <svg class="challenge--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+          <title>Close Modal</title>
+          <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"/>
+        </svg>
+      </button>
+    </div>
+    <div class="challenge--modal-content">
+      <iframe id="challengeIframe" src="about:blank" frameborder="0" scrolling="no"></iframe>
+    </div>
+  </div>
+</div>
+
+</div><!-- #page -->
+
+<script defer type='text/javascript' src='https://developer.ibm.com/site-content/themes/ibmdeveloper-carbon/js/navigation.js?ver=20151217'></script>
+<script type='text/javascript' src='https://developer.ibm.com/site-content/plugins/page-links-to/dist/new-tab.js?ver=3.3.3'></script>
+<script type='text/javascript' src='https://developer.ibm.com/wp-includes/js/wp-embed.min.js?ver=5.4.2'></script>
+<script>
+	var $searchTrigger = document.getElementById('header-search-module'),
+      $modalInstance = undefined,
+      $developerBurger = document.getElementById('developer-burger'),
+      $codeSideNav = document.getElementById('developerNavTriggersMobile'),
+      $codeSideNavCover = document.getElementById('code--side-nav-cover'),
+      $announcementClose = document.getElementById('announcement_close'),
+      $notificationDrawer = document.getElementById('notificationDrawer');
+
+      if($notificationDrawer != null){
+        $notificationDrawer.addEventListener('click', function(event) {
+          event.preventDefault();
+          $btn = ibmcode.getClosest(event.target, 'button');
+          if( $btn && $btn.classList.contains('bx--toast-notification__close-button') ){
+            ibmcode.getClosest($btn, 'div.bx--toast-notification').remove();
+          }
+        });
+      }
+
+
+  if($announcementClose != null){
+    $announcementClose.addEventListener('click', function(event) {
+      $elm = document.getElementById('code_announcement');
+      $elm.parentNode.removeChild($elm);
+      document.body.classList.remove('no-fixed-menu');
+      ibmcode.setCookie('Code_Annouce_Closed','true',0);
+    });
+  }
+
+	if($searchTrigger != null){ //this can be way more efficient
+		$searchTrigger.addEventListener('click', function(event) {
+      $btn = ibmcode.getClosest(event.target, 'button');
+      if( $btn && $btn.classList.contains('GlobalSearch-module--search-button--search') ){
+        if($searchTrigger.querySelector('input[type="text"]').value.trim() != "" && !($searchTrigger.classList.contains('GlobalSearch-module--hidden')) ){
+          $searchTrigger.querySelector('form').submit();
+        }
+        $searchTrigger.classList.remove('GlobalSearch-module--hidden');
+        $searchTrigger.querySelector('input[type="text"]').focus();
+        $searchTrigger.querySelector('.GlobalSearch-module--search-button--close').classList.remove('GlobalSearch-module--hidden');
+      }else if( $btn && $btn.classList.contains('GlobalSearch-module--search-button--close') ){
+        $searchTrigger.classList.add('GlobalSearch-module--hidden');
+        $searchTrigger.querySelector('input[type="text"]').value= "";
+        $searchTrigger.querySelector('.GlobalSearch-module--search-button--close').classList.add('GlobalSearch-module--hidden');
+      }
+			// window.location.href = 'https://developer.ibm.com?s=';
+		});
+	}
+
+  if($developerBurger != null && $codeSideNavCover != null && $codeSideNav != null){
+		$developerBurger.addEventListener('click', function(event) {
+      //bx--side-nav--expanded
+      if( document.body.classList.contains('bx--side-nav--opened') ){
+        document.body.classList.remove('bx--side-nav--opened');
+      }else{
+        document.body.classList.add('bx--side-nav--opened');
+      }
+		});
+    $codeSideNavCover.addEventListener('click', function(event) {
+      //bx--side-nav--expanded
+      if( document.body.classList.contains('bx--side-nav--opened') ){
+        document.body.classList.remove('bx--side-nav--opened');
+      }else{
+        document.body.classList.add('bx--side-nav--opened');
+      }
+		});
+    $codeSideNav.addEventListener('click', function(event) {
+      //bx--side-nav--expanded
+      $letsFix = event.target.closest('.bx--side-nav__submenu');
+      if($letsFix){
+        if($letsFix.classList.contains('noclick')){
+          return;
+        }
+        if($letsFix.getAttribute("aria-expanded") === 'false'){
+          $letsFix.setAttribute("aria-expanded", "true");
+        }else{
+          $letsFix.setAttribute("aria-expanded", "false");
+        }
+      }
+		});
+	}
+
+
+	$codeLeftNav = document.getElementById('code--side-nav');
+	if($codeLeftNav != null){
+		$codeLeftNav.addEventListener('click', function(event) {
+      event.preventDefault();
+			var menuDropDown = event.target.closest('button.bx--side-nav__submenu');
+      if(menuDropDown){
+        if(menuDropDown.classList.contains('noclick')){
+          return;
+        }
+        if(menuDropDown.getAttribute("aria-expanded") === 'false'){
+          menuDropDown.setAttribute("aria-expanded", "true");
+        }else{
+          menuDropDown.setAttribute("aria-expanded", "false");
+        }
+      }
+		});
+	}
+  var openMenuItem = null;
+  var openSearch = null;
+	document.addEventListener('click', function (event) {
+    // console.info('called');
+    //we need a click event here to close the search if its open and there is a
+    if(openMenuItem != event.target){
+      if(openMenuItem != null){
+        openMenuItem.setAttribute("aria-expanded", "false");
+        openMenuItem = null;
+      }
+    }
+
+    // console.info(event);
+		if ( event.target.classList.contains('bx--snippet__icon') ) {
+			// Get the parent with the `.accordion` class
+			var parentBtn = ibmcode.getClosest(event.target, '.bx--snippet-button');
+			var codeBlock = parentBtn.previousElementSibling.querySelectorAll('code');
+			if(codeBlock[0]){
+				ibmcode.copyText(codeBlock[0]);
+			}
+		}
+    if ( ibmcode.getClosest(event.target, '.bx--header__menu-title') ) {
+      event.preventDefault();
+      var newTarg = ibmcode.getClosest(event.target, '.bx--header__menu-title');
+      if(newTarg === openMenuItem && openMenuItem != null){
+        openMenuItem.setAttribute("aria-expanded", "false");
+        openMenuItem = null;
+        return
+      }
+      openMenuItem = newTarg;
+      openMenuItem.setAttribute("aria-expanded", "true");
+    }
+
+    if ( ibmcode.getClosest(event.target, '.GlobalLogin-module--container') ) {
+      if(event.target.className === 'bx--header__menu-item'){
+        return;
+      }
+      event.preventDefault();
+      var newTarg = ibmcode.getClosest(event.target, '.GlobalLogin-module--container');
+      if(newTarg === openMenuItem && openMenuItem != null){
+        openMenuItem.setAttribute("aria-expanded", "false");
+        openMenuItem = null;
+        return;
+      }
+      openMenuItem = newTarg;
+      openMenuItem.setAttribute("aria-expanded", "true");
+    }
+
+
+
+    if(event.target.id === "challengeModal" || event.target.classList.contains('challenge--modal-close') || event.target.closest('.challenge--modal-close')){
+      toggleChallengeModal('',true);
+      return;
+    }
+    //we clicked on a challenge and we need to trigger the modal for taking it
+    if ( event.target.closest('.developer--card.ibmcode_challenges.loggedin') ) {
+      event.preventDefault();
+      $challengeURL = event.target.closest('.developer--card.ibmcode_challenges.loggedin').querySelector('.developer--card__block_link').href;
+      toggleChallengeModal($challengeURL);
+		}
+    //we clicked on a card that wants to display in a modal
+    if ( event.target.closest('.developer--card.modal') ) {
+      event.preventDefault();
+      console.info(event.target);
+      $challengeURL = event.target.closest('.developer--card.modal').querySelector('.developer--card__block_link').href;
+      toggleChallengeModal($challengeURL);
+		}
+	}, false);
+
+
+  function set_size($size){
+    document.querySelector('#challengeIframeWrap .challenge--modal-content').style.height = $size;
+  }
+
+  function toggleChallengeModal($challengeURL,$close,$completedChallenge){
+    if($close === true){
+      document.body.classList.remove("showing-modal");
+      $iFrame = document.getElementById('challengeIframe');
+      $iFrame.src = 'about:blank';
+    }else{
+      $challengeModal = document.getElementById('challengeModal');
+      $iFrame = document.getElementById('challengeIframe');
+      // $iFrameHeight = $iFrame.contentWindow.document.body.offsetHeight;
+      $iFrame.src = $challengeURL;
+      document.body.classList.add("showing-modal");
+    }
+    if(typeof($completedChallenge) === "string"){
+      var completedChallengeCards = document.querySelectorAll('a[href="/challenges/'+$completedChallenge+'/"]');
+      for (var i = 0; i < completedChallengeCards.length; i++) {
+        completedChallengeCards[i].parentNode.classList.add('completed');
+      }
+    }
+  }
+
+
+  var domReadyCallback = function(){
+    // Handler when the DOM is fully loaded
+    //handling the loazy load
+    var lazyloadCardImages,
+        lazyloadContentImages;
+
+    if ("IntersectionObserver" in window) {
+      //this will handle the card background images styled by css
+      lazyloadCardImages = document.querySelectorAll(".lazycards");
+      var imageCardObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var image = entry.target;
+            image.classList.remove("lazycards");
+            imageCardObserver.unobserve(image);
+          }
+        });
+      });
+      lazyloadCardImages.forEach(function(image) {
+        imageCardObserver.observe(image);
+      });
+      //this will handle the images used in the body of our content types
+      lazyloadContentImages = document.querySelectorAll(".lazycontent");
+      var imageContentObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var image = entry.target;
+            image.src = image.dataset.src;
+            image.classList.remove("lazycontent");
+            imageContentObserver.unobserve(image);
+          }
+        });
+      });
+
+      lazyloadContentImages.forEach(function(image) {
+        imageContentObserver.observe(image);
+      });
+    }
+
+    //function that runs to set the same height of card elements
+
+    setTimeout(function() {
+      $sameHeightWidgets = document.querySelectorAll('[data-widget="setsameheight"]');
+      ibmcode.widgetSetSameHeight($sameHeightWidgets,true);
+    }, 250);
+    var resizeTimer;
+    ibmcode.addEvent(window,'resize',function(){
+      clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          ibmcode.widgetSetSameHeight($sameHeightWidgets,true);
+        }, 250);
+    });
+
+
+    //this javascript needs to get added to the page only when a user is logged in and auth is true
+
+  };
+
+  if ( document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll) ) {
+    domReadyCallback();
+  } else {
+    document.addEventListener("DOMContentLoaded", domReadyCallback);
+  }
+
+
+  /* adding functions to handle sending in favoriting */
+  // ibmcode.postAjax = function(url, data, callback)
+
+</script>
+
+
+</body>
+</html>
